@@ -20,7 +20,7 @@ Page{%endblock %} {%block main_content%}
                             <td>{{ item.dt_modified }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="/detail/{{ item.url_path }}" type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                                    <a href="/detail{{ item.url_path }}" type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                                     <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                   </div>
                             </td>

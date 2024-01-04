@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html' %} {% load static %} {% block title %}Detail
+Page{%endblock %} {%block main_content%}
+<section id="contact" class="contact mt-3">
+  <div class="container" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
+        <form
+          action="/validateJson"
+          method="post"
+          role="form"
+          class="php-email-form"
+        >
+          <input
+            type="hidden"
+            name="json_schema"
+            value="{{ data.json_schema }}"
+          />
+          <div class="form-group">
+            <label for="name">Url Path</label>
+            <input
+              type="text"
+              class="form-control"
+              name="subject"
+              id="subject"
+              disabled
+              value="{{ data.url_path }}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="name">Json String</label>
+            <textarea
+              class="form-control"
+              name="message"
+              rows="10"
+              placeholder="Masukkan Json String Anda"
+              required
+            ></textarea>
+          </div>
+          <div class="text-center">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<hr />
+{% endblock %}
