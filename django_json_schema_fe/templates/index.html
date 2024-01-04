@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html' %} {% load static %} {% block title %}Home
+Page{%endblock %} {%block content%}
+<section id="hero" class="d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <h1>Validating Your Json Data</h1>
+        <h2>Validate Your Json Data With Registered Your Json Schema</h2>
+        <div class="justify-content-center">
+          <a href="/generate" class="btn-generate scrollto">Generate</a>
+          <a href="/validate" class="btn-validate scrollto">Validate</a>
+          <a href="/faq" class="btn-faq scrollto">FAQ</a>
+        </div>
+      </div>
+      <div
+        class="col-lg-6 order-1 order-lg-2 hero-img"
+        data-aos="zoom-in"
+        data-aos-delay="200"
+      >
+        <img
+          src="{% static 'myapp/img/hero-img.png' %}"
+          class="img-fluid animated"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
