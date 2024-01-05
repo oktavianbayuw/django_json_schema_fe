@@ -1,7 +1,18 @@
 {% extends 'layouts/base.html' %} {% load static %} {% block title %}Validate
 Page{%endblock %} {%block main_content%}
-<section id="contact" class="contact m-5">
-    <div class="row">
+<section id="contact" class="contact mt-3">
+  <div class="container mt-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          List Of URL Validate JSON
+        </li>
+      </ol>
+    </nav>
+    <h2>Validate JSON</h2>
+  </div>
+    <div class="row m-5">
         <div class="col-md-8 text-center">
             <table class="table">
                 <thead class="thead-dark">
@@ -27,19 +38,6 @@ Page{%endblock %} {%block main_content%}
                             </td>
                         </tr>
                     {% endfor %}
-                  
-                  {% comment %} <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr> {% endcomment %}
                 </tbody>
               </table>
         </div>
