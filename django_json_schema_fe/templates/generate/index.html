@@ -1,26 +1,34 @@
 {% extends 'layouts/base.html' %} {% load static %} {% block title %}Generate
-Page{%endblock %} {%block main_content%}
+Page{% endblock %} {% block main_content %}
 <section id="contact" class="contact mt-3">
+  <div class="container mt-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Generate Schema
+        </li>
+      </ol>
+    </nav>
+    <h2>Generate Schema</h2>
+  </div>
   <div class="container" data-aos="fade-up">
-    <div class="section-title">
-      <h2>Insert and Generate Json Schema</h2>
-    </div>
-
     <div class="row">
-      <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
+      <div class="col-6 mt-5 mt-lg-0">
         <form
-          action="forms/contact.php"
+          action="/insert_data"
           method="post"
           role="form"
           class="php-email-form"
         >
+          {% csrf_token %}
           <div class="form-group">
             <label for="name">Url Path</label>
             <input
               type="text"
               class="form-control"
-              name="subject"
-              id="subject"
+              name="url_path"
+              id="urlPath"
               required
             />
           </div>
@@ -28,17 +36,27 @@ Page{%endblock %} {%block main_content%}
             <label for="name">Json String</label>
             <textarea
               class="form-control"
-              name="message"
-              rows="10"
+              id="jsonString"
+              name="json_string"
+              rows="5"
               required
             ></textarea>
+            <button
+              id="btn-submit"
+              type="button"
+              class="btn btn-success btn-sm mt-2"
+            >
+              Generate JSON Schema
+            </button>
           </div>
+
           <div class="form-group">
             <label for="name">Json Schema</label>
             <textarea
               class="form-control"
-              name="message"
-              rows="10"
+              id="jsonSchema"
+              name="json_schema"
+              rows="5"
               required
             ></textarea>
           </div>
@@ -49,13 +67,57 @@ Page{%endblock %} {%block main_content%}
               Your message has been sent. Thank you!
             </div>
           </div>
-          <div class="text-center">
+          <div>
             <button type="submit">Submit</button>
           </div>
         </form>
       </div>
+      <div class="col-md-6">
+        <div class="alert alert-info" role="alert">
+          <h4 class="alert-heading">Hasil JSON Schema</h4>
+          <pre id="jsonSchemaResult"></pre>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+<script>
+  $(document).ready(function () {
+    $("#btn-submit").on("click", function () {
+      // Ambil data dari formulir
+      var urlPath = $("#urlPath").val();
+      var jsonString = $("#jsonString").val();
+
+      // Buat objek data untuk dikirimkan ke API
+      var data = {
+        url_path: urlPath,
+        json_string: jsonString,
+      };
+
+      // Lakukan permintaan Ajax ke endpoint API
+      $.ajax({
+        type: "POST", // Gantilah dengan metode yang sesuai (GET, POST, dll.)
+        url: "http://127.0.0.1:8000/generateJsonSchema/", // Gantilah dengan URL endpoint Anda
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (response) {
+          // Tanggapi ketika permintaan berhasil
+          console.log(response);
+          // Update HTML elements dengan data JSON Schema yang diterima
+          $("#jsonSchemaResult").text(JSON.stringify(response, null, 2));
+        },
+        error: function (error) {
+          // Tanggapi ketika permintaan gagal
+          console.error("Error:", error);
+          // Tampilkan pesan kesalahan kepada pengguna
+          $(".error-message").text(
+            "Error generating JSON Schema. Please try again."
+          );
+        },
+      });
+    });
+  });
+</script>
+
 <hr />
 {% endblock %}
