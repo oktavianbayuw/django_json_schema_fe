@@ -2,16 +2,13 @@
 Page{%endblock %} {%block main_content%}
 <section id="contact" class="contact mt-3">
   <div class="container" data-aos="fade-up">
+    <div id="alertContainer" class="mt-3"></div>
     <div class="row">
       <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch">
-        <form
-          action="/validateJson"
-          method="post"
-          role="form"
-          class="php-email-form"
-        >
+        <form role="form" class="php-email-form" id="jsonForm">
           <input
             type="hidden"
+            id="jsonSchema"
             name="json_schema"
             value="{{ data.json_schema }}"
           />
@@ -31,13 +28,14 @@ Page{%endblock %} {%block main_content%}
             <textarea
               class="form-control"
               name="message"
+              id="jsonString"
               rows="10"
               placeholder="Masukkan Json String Anda"
               required
             ></textarea>
           </div>
           <div class="text-center">
-            <button type="submit">Submit</button>
+            <button type="button" id="submitButton">Submit</button>
           </div>
         </form>
       </div>
@@ -45,4 +43,51 @@ Page{%endblock %} {%block main_content%}
   </div>
 </section>
 <hr />
+<script>
+  $(document).ready(function () {
+    $("#submitButton").click(function () {
+      let jsonString = $("#jsonString").val();
+
+      let urlPath = $("#subject").val();
+
+      let jsonSchema = $("#jsonSchema").val();
+      const jsonSchemaToObj = eval(`(${jsonSchema})`);
+      $.ajax({
+        type: "POST",
+        url: "/validateJson",
+        data: {
+          json_schema: JSON.stringify(jsonSchemaToObj),
+          url_path: urlPath,
+          json_string: jsonString,
+        },
+        success: function (response) {
+          console.log(response);
+          if (response.code === 200) {
+            showAlert("success", response.detail);
+          } else {
+            showAlert("danger", response.detail);
+          }
+        },
+        error: function (error) {
+          console.error("Error:", error);
+          showAlert("danger", "Error occurred while validating JSON.");
+        },
+      });
+    });
+    function showAlert(type, message) {
+      $(".alert").remove();
+
+      var alertElement =
+        '<div class="alert alert-' +
+        type +
+        ' alert-dismissible fade show" role="alert">' +
+        "<strong>" +
+        message +
+        "</strong>" +
+        "</div>";
+
+      $("#alertContainer").append(alertElement);
+    }
+  });
+</script>
 {% endblock %}
