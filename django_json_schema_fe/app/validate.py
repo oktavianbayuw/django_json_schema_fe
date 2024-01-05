@@ -21,7 +21,6 @@ def detail(request, url_path):
     response = requests.get(api_url)
     data = response.json()
 
-    # Menyediakan data ke template
     context = {'data': data}
 
     return render(request, 'validate/detail.html', context)

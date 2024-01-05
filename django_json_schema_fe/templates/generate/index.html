@@ -85,24 +85,20 @@ Page{% endblock %} {% block main_content %}
 <script>
   $(document).ready(function () {
     $("#btn-submit").on("click", function () {
-      // Ambil data dari formulir
       var urlPath = $("#urlPath").val();
       var jsonString = $("#jsonString").val();
 
-      // Buat objek data untuk dikirimkan ke API
       var data = {
         url_path: urlPath,
         json_string: jsonString,
       };
 
-      // Lakukan permintaan Ajax ke endpoint API
       $.ajax({
-        type: "POST", // Gantilah dengan metode yang sesuai (GET, POST, dll.)
-        url: "http://api-python.digitalevent.id/generateJsonSchema/", // Gantilah dengan URL endpoint Anda
-        data: JSON.stringify(data),
+        type: "POST",
+        url: "/generateJsonSchema/",
         contentType: "application/json",
+        data: JSON.stringify(data),
         success: function (response) {
-          // Tanggapi ketika permintaan berhasil
           console.log(response);
           $("#jsonSchemaResult").text(JSON.stringify(response, null, 2));
         },
