@@ -58,3 +58,4 @@ def transform_json_format(json_str):
     json_str = re.sub(r'"(\w+)":', r'\1: ', json_str)
 
     return json_str
+    

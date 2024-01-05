@@ -22,6 +22,7 @@ Page{%endblock %} {%block main_content%}
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="/detail{{ item.url_path }}" type="button" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                                     <button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    <span class="url-path" style="display:none;">{{ item.url_path }}</span>
                                   </div>
                             </td>
                         </tr>
@@ -43,8 +44,41 @@ Page{%endblock %} {%block main_content%}
               </table>
         </div>
     </div>
-  
 </section>
   <hr />
+  <script>
+    $(document).ready(function () {
+      $('.btn-danger').click(function () {
+        var urlPath = $(this).closest('tr').find('.url-path').text();
+        var confirmation = confirm('Apakah Anda yakin ingin menghapus data dengan URL Path: ' + urlPath + '?');
+        
+        if (confirmation) {
+          deleteData(urlPath);
+        }
+      });
+
+      function deleteData(urlPath) {
+        console.log(urlPath);
+        let urlP = 'http://127.0.0.1:8000/delete' + urlPath + '/'
+        
+        console.log(urlP);
+        $.ajax({
+          type: 'DELETE',
+          url: urlP ,
+          data: {
+            url_path: urlPath,
+          },
+          success: function (data) {
+            alert('Data berhasil dihapus');
+            location.reload(); // Refresh halaman setelah penghapusan data
+          },
+          error: function (error) {
+            alert('Gagal menghapus data. Periksa konsol untuk informasi lebih lanjut.');
+            console.error(error);
+          }
+        });
+      }
+    });
+  </script>
   {% endblock %}
 </section>
