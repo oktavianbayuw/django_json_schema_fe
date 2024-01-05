@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 def index(request):
-    api_url = 'http://localhost:8000/allData/'
+    api_url = 'http://api-python.digitalevent.id/allData/'
     response = requests.get(api_url)
     data = response.json()
 
@@ -17,7 +17,7 @@ def index(request):
 
 def detail(request, url_path):
     print(url_path)
-    api_url = f'http://127.0.0.1:8000/getData/?url_path=/{url_path}'
+    api_url = f'http://api-python.digitalevent.id/getData/?url_path=/{url_path}'
     response = requests.get(api_url)
     data = response.json()
 
@@ -33,7 +33,7 @@ def validateJson(request):
     url_path = request.data.get('url_path')
     json_string = request.data.get('json_string')
 
-    api_url = 'http://127.0.0.1:8000/validate_json/'
+    api_url = 'http://api-python.digitalevent.id/validate_json/'
     payload = {
         'json_schema': json_schema,
         'url_path': url_path,
