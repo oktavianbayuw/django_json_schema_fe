@@ -98,7 +98,7 @@ Page{% endblock %} {% block main_content %}
       // Lakukan permintaan Ajax ke endpoint API
       $.ajax({
         type: "POST", // Gantilah dengan metode yang sesuai (GET, POST, dll.)
-        url: "http://127.0.0.1:8000/generateJsonSchema/", // Gantilah dengan URL endpoint Anda
+        url: "http://api-python.digitalevent.id/generateJsonSchema/", // Gantilah dengan URL endpoint Anda
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (response) {
