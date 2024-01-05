@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html' %} {% load static %} {% block title %}Generate
 Page{% endblock %} {% block main_content %}
-<section id="contact" class="contact mt-3">
+<section class="contact mt-3">
   <div class="container mt-5">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -23,7 +23,7 @@ Page{% endblock %} {% block main_content %}
         >
           {% csrf_token %}
           <div class="form-group">
-            <label for="name">Url Path</label>
+            <label for="urlPath">Url Path</label>
             <input
               type="text"
               class="form-control"
@@ -33,7 +33,7 @@ Page{% endblock %} {% block main_content %}
             />
           </div>
           <div class="form-group">
-            <label for="name">Json String</label>
+            <label for="jsonString">Json String</label>
             <textarea
               class="form-control"
               id="jsonString"
@@ -51,7 +51,7 @@ Page{% endblock %} {% block main_content %}
           </div>
 
           <div class="form-group">
-            <label for="name">Json Schema</label>
+            <label for="jsonSchema">Json Schema</label>
             <textarea
               class="form-control"
               id="jsonSchema"
@@ -81,6 +81,7 @@ Page{% endblock %} {% block main_content %}
     </div>
   </div>
 </section>
+<hr />
 <script>
   $(document).ready(function () {
     $("#btn-submit").on("click", function () {
@@ -103,13 +104,10 @@ Page{% endblock %} {% block main_content %}
         success: function (response) {
           // Tanggapi ketika permintaan berhasil
           console.log(response);
-          // Update HTML elements dengan data JSON Schema yang diterima
           $("#jsonSchemaResult").text(JSON.stringify(response, null, 2));
         },
         error: function (error) {
-          // Tanggapi ketika permintaan gagal
           console.error("Error:", error);
-          // Tampilkan pesan kesalahan kepada pengguna
           $(".error-message").text(
             "Error generating JSON Schema. Please try again."
           );
@@ -119,5 +117,4 @@ Page{% endblock %} {% block main_content %}
   });
 </script>
 
-<hr />
 {% endblock %}
