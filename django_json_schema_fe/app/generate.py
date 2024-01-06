@@ -1,51 +1,69 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import requests
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 def index(request):
     return render(request, "generate/index.html")
 
+@csrf_exempt
+def generate_json_schema(request):
+    if request.method == 'POST':
+        try:
+            # Dapatkan data dari permintaan POST
+            data = json.loads(request.body.decode('utf-8'))
+
+            # Lakukan permintaan ke endpoint API
+            api_url = "http://api-python.digitalevent.id/generateJsonSchema/"
+            response = requests.post(api_url, json=data)
+
+            # Periksa apakah permintaan berhasil
+            if response.status_code == 200:
+                # Jika berhasil, kembalikan respons dari API
+                return JsonResponse(response.json())
+
+            # Jika permintaan gagal, kembalikan pesan kesalahan
+            return JsonResponse({'error': 'Failed to generate JSON Schema.'}, status=response.status_code)
+
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Invalid JSON format.'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 def insert_data(request):
-    # Cek apakah request adalah POST
     if request.method == 'POST':
-        # Ambil data dari formulir POST
+        print("OK")
         url_path = request.POST.get('url_path')
         json_string = request.POST.get('json_string')
         json_schema = request.POST.get('json_schema')
 
-        # Formulir data untuk dikirim ke API
         form_data = {
             'url_path': url_path,
             'json_string': json_string,
             'json_schema': json_schema
         }
 
-        # Ganti URL API sesuai dengan kebutuhan Anda
-        api_url = 'http://localhost:8000/insertJson/'
-        # Kirim permintaan POST ke API dengan data yang dikirim dari formulir
+        api_url = 'http://api-python.digitalevent.id/insertJson/'
         response = requests.post(api_url, data=form_data)
-        # Cek apakah permintaan berhasil
+        print(response)
         if (response.status_code == 200 | response.status_code == 201):
             print(response.status_code)
-            # Jika berhasil, dapatkan data respons dari API
             data = response.json()
-
-            # Kirim data ke template
-            return render(request, "generate/index.html")
+            print(data)
+            return render(request, "generate/index.html", {'data' : data})
         else:
-            # Jika permintaan tidak berhasil, atur pesan kesalahan atau tindakan yang sesuai
             error_message = f"Error: {response.status_code} - {response.text}"
             return render(request, "generate/index.html", {'error_message': error_message})
 
-    # Jika request bukan POST, kembalikan halaman biasa
     return render(request, "generate/index.html")
 
 def fetch_api_data(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        response = requests.post('http://127.0.0.1:8000/generateJsonSchema/')
+        response = requests.post('http://api-python.digitalevent.id/generateJsonSchema/')
 
         if response.status_code == 200:
             api_data = response.json()
