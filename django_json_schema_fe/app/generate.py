@@ -3,6 +3,9 @@ from django.http import JsonResponse
 import requests
 from django.views.decorators.csrf import csrf_exempt
 import json
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 def index(request):
     return render(request, "generate/index.html")
@@ -19,7 +22,7 @@ def generate_json_schema(request):
             response = requests.post(api_url, json=data)
 
             # Periksa apakah permintaan berhasil
-            if response.status_code == 200:
+            if response.status_code == 200 | response.status_code == 201:
                 # Jika berhasil, kembalikan respons dari API
                 return JsonResponse(response.json())
 
@@ -33,32 +36,29 @@ def generate_json_schema(request):
 
     return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
+@api_view(['POST'])
 def insert_data(request):
-    if request.method == 'POST':
-        print("OK")
-        url_path = request.POST.get('url_path')
-        json_string = request.POST.get('json_string')
-        json_schema = request.POST.get('json_schema')
-
-        form_data = {
-            'url_path': url_path,
-            'json_string': json_string,
-            'json_schema': json_schema
-        }
+    
+        json_schema = request.data.get('json_schema')
+        url_path = request.data.get('url_path')
+        json_string = request.data.get('json_string')
 
         api_url = 'http://api-python.digitalevent.id/insertJson/'
-        response = requests.post(api_url, data=form_data)
-        print(response)
-        if (response.status_code == 200 | response.status_code == 201):
-            print(response.status_code)
-            data = response.json()
-            print(data)
-            return render(request, "generate/index.html", {'data' : data})
-        else:
-            error_message = f"Error: {response.status_code} - {response.text}"
-            return render(request, "generate/index.html", {'error_message': error_message})
+        payload = {
+            'json_schema': json_schema,
+            'url_path': url_path,
+            'json_string': json_string,
+        }
 
-    return render(request, "generate/index.html")
+        response = requests.post(api_url, data=payload)
+        print(response)
+        if response.status_code == 201:
+            return Response({'message' : 'success'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': f'Failed to insert data. Status code: {response.status_code}'})
+
+
+
 
 def fetch_api_data(request):
     if request.method == "POST":

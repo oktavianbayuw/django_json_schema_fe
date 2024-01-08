@@ -6,7 +6,7 @@ from app import main_views
 urlpatterns = [
     path('', main_views.index, name="index"),
     path('generate/', generate.index, name="index_generate"),
-    path('insert_data', generate.insert_data, name="insert_data"),
+    path('insert_data/', generate.insert_data, name="insert_data"),
     path('validate', validate.index, name="index_validate"),
     path('detail/<str:url_path>/', validate.detail, name='detail_view'),
     path('validateJson', validate.validateJson, name='validate_json'),

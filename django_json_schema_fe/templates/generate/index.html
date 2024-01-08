@@ -15,12 +15,15 @@ Page{% endblock %} {% block main_content %}
   <div class="container" data-aos="fade-up">
     <div class="row">
       <div class="col-6 mt-5 mt-lg-0">
+        <div class="message-container">
+          <div class="success-message"></div>
+          <div class="error-message"></div>
+        </div>
         <form
-          action="/insert_data"
-          method="post"
           role="form"
           class="php-email-form"
-        >
+          id="formGenerate"
+          action=""        >
           {% csrf_token %}
           <div class="form-group">
             <label for="urlPath">Url Path</label>
@@ -68,7 +71,7 @@ Page{% endblock %} {% block main_content %}
             </div>
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit" id="submitButton">Submit</button>
           </div>
         </form>
       </div>
@@ -84,7 +87,22 @@ Page{% endblock %} {% block main_content %}
 <hr />
 <script>
   $(document).ready(function () {
-    $("#btn-submit").on("click", function () {
+    function showAlert(type, message) {
+      $(".alert").remove();
+
+      var alertElement =
+        '<div class="alert alert-' +
+        type +
+        ' alert-dismissible fade show" role="alert">' +
+        "<strong>" +
+        message +
+        "</strong>" +
+        "</div>";
+
+      $("#alertContainer").append(alertElement);
+    }
+  });
+  $("#btn-submit").on("click", function () {
       var urlPath = $("#urlPath").val();
       var jsonString = $("#jsonString").val();
 
@@ -95,7 +113,7 @@ Page{% endblock %} {% block main_content %}
 
       $.ajax({
         type: "POST",
-        url: "/generateJsonSchema/",
+        url: "http://127.0.0.1:8001/generateJsonSchema/",
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (response) {
@@ -110,7 +128,41 @@ Page{% endblock %} {% block main_content %}
         },
       });
     });
+
+  $(document).on('submit', '#formGenerate',function(e){
+   e.preventDefault
+  var urlPath = $("#urlPath").val();
+  var jsonString = $("#jsonString").val();
+  var jsonSchema = $("#jsonSchema").val();
+  
+  // Mendapatkan CSRF Token dari formulir
+  var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+  var data = {
+    url_path: urlPath,
+    json_string: jsonString,
+    json_schema: jsonSchema,
+  };
+  console.log(data);
+  $.ajax({
+    type: "POST",
+    url: "http://127.0.0.1:8001/insert_data/",
+    contentType: "application/json",
+    data: JSON.stringify(data),
+    headers: {
+      "X-CSRFToken": csrftoken
+    },
+    success: function (response) {
+    
+    alert("Data Berhasil di tambahkan");
+    console.log("Success:", response);
+    },
+    error: function(e){
+      alert("erronya" +  e.message)
+    }
   });
+});
+  
 </script>
 
 {% endblock %}
