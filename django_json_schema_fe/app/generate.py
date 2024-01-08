@@ -11,22 +11,18 @@ def index(request):
     return render(request, "generate/index.html")
 
 @csrf_exempt
+@api_view(['POST'])
 def generate_json_schema(request):
     if request.method == 'POST':
         try:
-            # Dapatkan data dari permintaan POST
             data = json.loads(request.body.decode('utf-8'))
 
-            # Lakukan permintaan ke endpoint API
             api_url = "http://api-python.digitalevent.id/generateJsonSchema/"
             response = requests.post(api_url, json=data)
 
-            # Periksa apakah permintaan berhasil
-            if response.status_code == 200 | response.status_code == 201:
-                # Jika berhasil, kembalikan respons dari API
+            if response.status_code == 200:
                 return JsonResponse(response.json())
 
-            # Jika permintaan gagal, kembalikan pesan kesalahan
             return JsonResponse({'error': 'Failed to generate JSON Schema.'}, status=response.status_code)
 
         except json.JSONDecodeError as e:
