@@ -48,24 +48,22 @@ Page{%endblock %} {%block main_content%}
     $(document).ready(function () {
       $('.btn-danger').click(function () {
         var urlPath = $(this).closest('tr').find('.url-path').text();
+        let cleanUrl = urlPath.replace(/^\/+/, '');
         var confirmation = confirm('Apakah Anda yakin ingin menghapus data dengan URL Path: ' + urlPath + '?');
         
         if (confirmation) {
-          deleteData(urlPath);
+          deleteData(cleanUrl);
         }
       });
 
       function deleteData(urlPath) {
         console.log(urlPath);
-        let urlP = 'http://api-python.digitalevent.id/delete' + urlPath + '/'
-        
+        let urlP = `/delete_data/${urlPath}/`;
+
         console.log(urlP);
         $.ajax({
           type: 'DELETE',
-          url: urlP ,
-          data: {
-            url_path: urlPath,
-          },
+          url: urlP,
           success: function (data) {
             alert('Data berhasil dihapus');
             location.reload();

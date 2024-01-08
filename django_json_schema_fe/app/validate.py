@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 import requests
-import json
+from django.views.decorators.csrf import csrf_exempt
 import re
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -57,4 +59,22 @@ def transform_json_format(json_str):
     json_str = re.sub(r'"(\w+)":', r'\1: ', json_str)
 
     return json_str
+
+@csrf_exempt
+def delete_data(request, url_path):
+    if request.method == 'DELETE':
+        try:
+            api_url = f"http://api-python.digitalevent.id/delete/{url_path}/"
+            print(api_url)
+            response = requests.delete(api_url)
+
+            if response.status_code == 200:
+                return JsonResponse(response.json())
+
+            return JsonResponse({'error': 'Failed to delete data.'}, status=response.status_code)
+
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)
     
