@@ -64,6 +64,7 @@ def transform_json_format(json_str):
 def delete_data(request, url_path):
     if request.method == 'DELETE':
         try:
+            # post to delete data url in backend
             api_url = f"http://api-python.digitalevent.id/delete/{url_path}/"
             print(api_url)
             response = requests.delete(api_url)
