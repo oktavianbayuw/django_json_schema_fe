@@ -117,8 +117,12 @@ Page{% endblock %} {% block main_content %}
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function (response) {
-          console.log(response);
-          $("#jsonSchemaResult").text(JSON.stringify(response, null, 2));
+          let responseJson = response;
+          if ("$schema" in responseJson) {
+            delete responseJson["$schema"];
+          }
+          let resultJsonString = JSON.stringify(responseJson, null, 2);
+          $("#jsonSchemaResult").text(resultJsonString);
         },
         error: function (error) {
           console.error("Error:", error);
