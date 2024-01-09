@@ -96,7 +96,7 @@ Page{%endblock %} {%block main_content%}
             <i
               class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
             ></i
-            >lorem header 1
+            >List Keyword JSON Schema
           </button>
         </div>
         <div
@@ -106,15 +106,28 @@ Page{%endblock %} {%block main_content%}
           data-parent="#accordion"
         >
           <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <ul>
+              <li><p><strong>Required Keyword</strong> Which properties in an object must exist is specified using the required keyword. Each string in the array accepts the name of a necessary property. A required property must be present for an object to pass validation. For illustration, the following schema demands that an object have the name and age properties:</p></li>
+              <li><p><strong>Type Keyword </strong>The type of a JSON value is specified using the type keyword. It can accept a single string or an array of strings, each of which is a legitimate JSON type. Validation fails if a value does not fit the designated type. The following schema, for instance, demands that a value be a string</p></li>
+              <li><p><strong>Enum Keyword </strong>The ‘enum’ keyword specifies a list of potential values for a property. Each value in the JSON array must match a valid value for the property. If a value does not match any predefined values, it is not considered valid. A value must fall under one of the three categories in the following schema</p></li>
+              <li><p><strong>Minimum And Maximum Keywords</strong>The minimum and maximum values assigned to a property are specified using the minimum and maximum keywords. They ask for a number that represents the lowest or highest value permitted. The value fails validation if it falls below the minimum or exceeds the maximum. For instance, the following schema demands that a value fall within the range of 18 and 100</p></li>
+              <li><p><strong>The minimum and maximum values assigned to a property are specified using the minimum and maximum keywords. They ask for a number that represents the lowest or highest value permitted. The value fails validation if it falls below the minimum or exceeds the maximum. For instance, the following schema demands that a value fall within the range of 18 and 100</strong></p></li>
+              <li><p><strong>ExclusiveMinimum And ExclusiveMaximum Keywords</strong>To remove the minimum and maximum values from the permitted range, use the exclusiveMinimum and exclusiveMaximum keywords. The following schema, for instance, stipulates that a value must be greater than 0 and less than 100.</p></li>
+              <li><p><strong>Multipleof Keyword</strong>Specify a multiple that a numeric value must be divisible using the multipleOf keyword. It requires a multiple of a number. A value fails validation if it cannot be divided by the required multiple.</p></li>
+              <li><p><strong>Validation Keywords For Strings Pattern Keyword</strong>When a string value must match a regular expression pattern, the pattern keyword specifies that requirement. The pattern for the regular expression is a string that is required. A string fails validation if it does not match the pattern.</p></li>
+              <li><p><strong>Length Keywords</strong>The minimum and maximum lengths of string can be specified using the minLength and maxLength keywords, respectively. Request a non-negative integer that represents either the smallest or largest permitted length. A string fails validation if it is either shorter than the minLength or longer than the maxLength.</p></li>
+              <li><p><strong>Format Keywords</strong>A string’s required format can be specified using the format keyword. The format is a string that is required.</p></li>
+              <li><p><strong>Validation Keywords For Arrays</strong>Arrays are a frequent data type in JSON, and validation is frequently needed to make sure they abide by established guidelines and restrictions. For arrays, JSON Schema offers a number of validation keywords that use to impose these restrictions. Look at a few of the most popular JSON Schema array validation keywords.</p></li>
+              <li><p><strong>Items Keyword</strong>If you want to specify a validation schema for every item in an array, you can use the “items” keyword. This keyword accepts either a single schema or a collection of schemas. If a single schema provides, all items in the array are subject to it. On the other hand, if an array of schemas is provided, each schema is applied to the corresponding item in the array.</p></li>
+              <li><p><strong>Additional Items Keyword</strong>The validation schema for additional items in an array is specified using the additionalItems keyword. When there are additional items in the array for which there is no corresponding schema, and the “items” keyword is an array of schemas. All additional items in the array are subject to the schema specified by the additionalItems keyword.For instance, the following schema mandates that a value be an array with an integer as the first item and a string as the second item.</p></li>
+              <li><p><strong>Min And Max Items Keywords</strong>The minimum and maximum number of items in an array is specified, using the minItems and maxItems keywords. The minimum or maximum number of items they accept is a non-negative integer. An array fails validation if the number of items is less than the minItems or greater than the maxItems.</p></li>
+              <li><p><strong>Unique Items Keyword</strong>To specify whether each item in an array must be unique, use the uniqueItems keyword. It accepts a boolean result. If true, each element of the array needs to be distinct. Items repeat if set to false or excluded.</p></li>
+              <li><p><strong>Validation Keywords For Objects Properties Keyword</strong>For each property of an object, a schema using the properties keyword. It requires the object whose keys are the names of the properties and whose values are schemas outlining those properties.</p></li>
+              <li><p><strong>Additional Properties Keyword</strong>The validation schema for additional properties in an object is specified using the additionalProperties keyword. It is used when the properties keyword does not specify a schema for every other object’s properties. All additional properties in the object will have the schema specified by the additionalProperties keyword applied to them.</p></li>
+              <li><p><strong>Min And Max Properties Keywords</strong>The minimum and maximum number of properties in an object is specified particularly by the minProperties and maxProperties keywords. The minimum or maximum number of properties they can accept is a non-negative integer. An object fails validation if it has fewer properties than the minProperties or more properties than the maxProperties.</p></li>
+              <li><p><strong>Dependencies Keyword</strong>Dependencies between object properties are specified using the dependencies keyword. It requires an object with schemas or arrays of property names as values and property names as keys. The corresponding schema or array of property names must be present if the object’s key property is present.</p></li>
+            </ul>
+            <p>Referensi : <a href="https://www.qatouch.com/blog/validating-json-schema/">https://www.qatouch.com/blog/validating-json-schema/</a></p>
           </div>
         </div>
       </div>
@@ -133,7 +146,7 @@ Page{%endblock %} {%block main_content%}
             <i
               class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
             ></i
-            >Is there a 24/7 response for emergencies?
+            >The Data Structures and Data Types
           </button>
         </div>
         <div
@@ -143,15 +156,15 @@ Page{%endblock %} {%block main_content%}
           data-parent="#accordion"
         >
           <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <ul>
+              <li><p><strong>Array</strong> A JSON Schema definition is close to the actual JSON document itself</p></li>
+              <li><p><strong>Object</strong> The property “type” describes in this case that we expect the JSON document to be an array.</p></li>
+              <li><p><strong>Object properties</strong>we can define the object properties and their type:</p></li>
+              <li><p><strong>Validation keywords</strong>Now comes the interesting part: we can use validation keywords to define that the properties “name” and “age” are required (properties are optional by default), that age must be a positive number, and that the email must contain an actual valid email address. Note that we already used the most common validation keyword before, that is “type”.</p></li>
+              <li><p><strong>Schema keywords</strong></p></li>
+              <li><p><strong>Documentation</strong></p></li>
+            </ul>
+            <p>Referensi : <a href="https://jsoneditoronline.org/indepth/validate/json-schema-validator/">https://jsoneditoronline.org/indepth/validate/json-schema-validator/</a></p>
           </div>
         </div>
       </div>
@@ -170,7 +183,7 @@ Page{%endblock %} {%block main_content%}
             <i
               class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
             ></i
-            >How are owners’ concerns handled?
+            >How To Generate Json Schema Online
           </button>
         </div>
         <div
@@ -180,163 +193,7 @@ Page{%endblock %} {%block main_content%}
           data-parent="#accordion"
         >
           <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="card border-0 wow fadeInUp"
-        style="visibility: visible; animation-name: fadeInUp"
-      >
-        <div class="card-header p-0 border-0" id="heading-242">
-          <button
-            class="btn btn-link accordion-title border-0 collapsed"
-            data-toggle="collapse"
-            data-target="#collapse-242"
-            aria-expanded="false"
-            aria-controls="#collapse-242"
-          >
-            <i
-              class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
-            ></i
-            >How do I get repairs completed to my unit?
-          </button>
-        </div>
-        <div
-          id="collapse-242"
-          class="collapse"
-          aria-labelledby="heading-242"
-          data-parent="#accordion"
-        >
-          <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="card border-0 wow fadeInUp"
-        style="visibility: visible; animation-name: fadeInUp"
-      >
-        <div class="card-header p-0 border-0" id="heading-243">
-          <button
-            class="btn btn-link accordion-title border-0 collapsed"
-            data-toggle="collapse"
-            data-target="#collapse-243"
-            aria-expanded="false"
-            aria-controls="#collapse-243"
-          >
-            <i
-              class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
-            ></i
-            >What are the duties of a property manager?
-          </button>
-        </div>
-        <div
-          id="collapse-243"
-          class="collapse"
-          aria-labelledby="heading-243"
-          data-parent="#accordion"
-        >
-          <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="card border-0 wow fadeInUp"
-        style="visibility: visible; animation-name: fadeInUp"
-      >
-        <div class="card-header p-0 border-0" id="heading-244">
-          <button
-            class="btn btn-link accordion-title border-0 collapsed"
-            data-toggle="collapse"
-            data-target="#collapse-244"
-            aria-expanded="false"
-            aria-controls="#collapse-244"
-          >
-            <i
-              class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
-            ></i
-            >Do we receive copies of all invoices paid?
-          </button>
-        </div>
-        <div
-          id="collapse-244"
-          class="collapse"
-          aria-labelledby="heading-244"
-          data-parent="#accordion"
-        >
-          <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="card border-0 wow fadeInUp"
-        style="visibility: visible; animation-name: fadeInUp"
-      >
-        <div class="card-header p-0 border-0" id="heading-245">
-          <button
-            class="btn btn-link accordion-title border-0 collapsed"
-            data-toggle="collapse"
-            data-target="#collapse-245"
-            aria-expanded="false"
-            aria-controls="#collapse-245"
-          >
-            <i
-              class="fas fa-minus text-center d-flex align-items-center justify-content-center h-100"
-            ></i
-            >How are arrears handled?
-          </button>
-        </div>
-        <div
-          id="collapse-245"
-          class="collapse"
-          aria-labelledby="heading-245"
-          data-parent="#accordion"
-        >
-          <div class="card-body accordion-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p>Referensi : <a href="https://www.liquid-technologies.com/online-json-to-schema-converter">https://www.liquid-technologies.com/online-json-to-schema-converter</a></p>
           </div>
         </div>
       </div>
